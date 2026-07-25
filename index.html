@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digvijay Sharma — AML &amp; KYC Compliance Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1B30;
+    --ink-2:#16273F;
+    --paper:#FBF9F4;
+    --paper-dim:#F2EFE7;
+    --gold:#AD8A55;
+    --gold-bright:#C7A369;
+    --verified:#1F6F63;
+    --charcoal:#22262C;
+    --body-text:#3C3F45;
+    --hairline:#E2DCCC;
+    --hairline-dark:rgba(251,249,244,0.14);
+    --muted:#8D95A6;
+    --muted-dark:#7C8AA3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);color:var(--charcoal);
+    font-family:'IBM Plex Sans',sans-serif;font-weight:400;line-height:1.65;
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  ::selection{background:var(--gold);color:var(--ink);}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 clamp(24px,4vw,56px);height:70px;
+    background:rgba(14,27,48,0.9);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--hairline-dark);
+    transform:translateY(-100%);transition:transform 0.5s cubic-bezier(.2,.8,.3,1);
+  }
+  nav.show{transform:translateY(0);}
+  .nav-mark{font-family:'Fraunces',serif;font-size:18px;font-weight:500;color:var(--paper);display:flex;align-items:center;gap:9px;}
+  .nav-mark .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-bright);}
+  .nav-links{display:flex;gap:30px;}
+  .nav-links a{font-size:12.5px;letter-spacing:0.04em;color:var(--muted-dark);position:relative;padding:4px 0;transition:color 0.25s ease;}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold-bright);transition:width 0.3s ease;}
+  .nav-links a.active,.nav-links a:hover{color:var(--paper);}
+  .nav-links a.active::after,.nav-links a:hover::after{width:100%;}
+  @media(max-width:860px){.nav-links{display:none;}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;color:var(--paper);
+    background:linear-gradient(180deg,var(--ink) 0%, var(--ink-2) 100%);
+    display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(28px,5vw,64px) clamp(28px,5vw,64px) 0;
+    overflow:hidden;
+  }
+  #spotlight{position:absolute;inset:0;pointer-events:none;transition:background 0.15s ease;z-index:1;}
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(251,249,244,0.025) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(251,249,244,0.025) 40px);
+  }
+  .hero-top{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--muted-dark);position:relative;z-index:2;margin-bottom:auto;
+  }
+  .status-pill{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 10px;border:1px solid var(--hairline-dark);border-radius:100px;}
+  .status-pill .pulse{width:6px;height:6px;border-radius:50%;background:var(--verified);animation:pulse 2.2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,111,99,0.5);}70%{box-shadow:0 0 0 7px rgba(31,111,99,0);}100%{box-shadow:0 0 0 0 rgba(31,111,99,0);}}
+
+  .hero-main{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;align-items:center;gap:48px;padding:56px 0 40px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:22px;opacity:0;animation:rise 0.8s ease forwards 0.15s;}
+  h1.name{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(40px,6.6vw,88px);line-height:0.97;letter-spacing:-0.015em;opacity:0;animation:rise 0.9s ease forwards 0.3s;}
+  h1.name em{font-style:italic;font-weight:300;color:var(--gold-bright);}
+  .role-line{margin-top:26px;font-family:'Fraunces',serif;font-style:italic;font-size:clamp(16px,1.9vw,22px);color:rgba(251,249,244,0.78);max-width:50ch;opacity:0;animation:rise 0.9s ease forwards 0.48s;}
+  .stat-row{margin-top:32px;display:flex;gap:36px;flex-wrap:wrap;opacity:0;animation:rise 0.9s ease forwards 0.58s;}
+  .stat-row div span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted-dark);margin-bottom:6px;}
+  .stat-row div b{font-family:'Fraunces',serif;font-weight:500;font-size:24px;color:var(--gold-bright);}
+  .hero-meta{margin-top:30px;display:flex;gap:36px;flex-wrap:wrap;opacity:0;animation:rise 0.9s ease forwards 0.7s;}
+  .hero-meta div span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted-dark);margin-bottom:6px;}
+  .hero-meta div a{font-size:14.5px;color:var(--paper);transition:color 0.2s ease;}
+  .hero-meta div a:hover{color:var(--gold-bright);}
+
+  .seal-wrap{opacity:0;animation:sealIn 1s cubic-bezier(.16,.9,.25,1.05) forwards 0.85s;}
+  @keyframes sealIn{from{opacity:0;transform:scale(0.75) rotate(-6deg);}to{opacity:1;transform:scale(1) rotate(0deg);}}
+  .seal{width:clamp(112px,13vw,160px);height:auto;animation:sealFloat 6s ease-in-out infinite;}
+  @keyframes sealFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  .seal .ring-outer,.seal .ring-inner{stroke:var(--gold-bright);}
+  .seal .ring-thin{stroke:rgba(199,163,105,0.4);}
+  .seal text{fill:var(--gold-bright);font-family:'IBM Plex Mono',monospace;}
+  .seal .center-text{fill:var(--paper);font-family:'Fraunces',serif;}
+  @media(max-width:820px){.hero-main{grid-template-columns:1fr;}.seal-wrap{justify-self:flex-start;}}
+
+  @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ---------- TICKER ---------- */
+  .ticker-wrap{position:relative;z-index:2;border-top:1px solid var(--hairline-dark);background:rgba(0,0,0,0.15);overflow:hidden;white-space:nowrap;padding:14px 0;}
+  .ticker-track{display:inline-flex;animation:scroll-left 34s linear infinite;}
+  .ticker-wrap:hover .ticker-track{animation-play-state:paused;}
+  .ticker-item{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.04em;color:var(--muted-dark);padding:0 28px;border-right:1px solid var(--hairline-dark);}
+  .ticker-item .up{color:var(--verified);}
+  .ticker-item b{color:var(--paper);font-weight:500;}
+  @keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- SECTIONS ---------- */
+  section.rec{max-width:1000px;margin:0 auto;padding:100px 32px;}
+  section.rec.alt{background:var(--paper-dim);max-width:none;}
+  section.rec.alt > .inner{max-width:1000px;margin:0 auto;}
+  .rec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:52px;}
+  .rec-num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:0.1em;border:1px solid var(--hairline);padding:4px 9px;border-radius:2px;}
+  .rec-title{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(26px,3.5vw,36px);letter-spacing:-0.01em;}
+  .rec-title-line{flex:1;height:1px;background:var(--hairline);}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity 0.8s ease, transform 0.8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  .summary p{font-size:19px;max-width:68ch;color:var(--body-text);font-weight:300;}
+  .summary p .accent{color:var(--verified);font-weight:500;}
+  .summary p .accent2{color:var(--gold);font-weight:500;}
+
+  /* ---------- ACCORDION EXPERIENCE ---------- */
+  .acc-item{border-bottom:1px solid var(--hairline);}
+  .acc-item:first-child{border-top:1px solid var(--hairline);}
+  .acc-head{display:flex;align-items:center;gap:16px;width:100%;background:none;border:none;text-align:left;padding:26px 4px;}
+  .acc-dot{width:10px;height:10px;border-radius:50%;border:2px solid var(--gold);flex-shrink:0;transition:background 0.3s ease;}
+  .acc-item.open .acc-dot{background:var(--gold);}
+  .acc-titles{flex:1;}
+  .acc-role{font-family:'Fraunces',serif;font-size:20px;font-weight:500;color:var(--charcoal);}
+  .acc-org{font-size:13.5px;color:var(--verified);font-weight:500;margin-top:2px;}
+  .active-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;background:rgba(31,111,99,0.1);color:var(--verified);padding:3px 8px;border-radius:2px;font-weight:600;margin-left:8px;}
+  .acc-date{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);white-space:nowrap;}
+  .acc-chevron{width:11px;height:11px;border-right:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold);transform:rotate(45deg);transition:transform 0.35s ease;flex-shrink:0;}
+  .acc-item.open .acc-chevron{transform:rotate(-135deg);}
+  .acc-body{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(.2,.8,.3,1);}
+  .acc-body-inner{padding:0 4px 30px 26px;}
+  .acc-body ul{list-style:none;}
+  .acc-body li{position:relative;padding-left:22px;margin-bottom:11px;font-size:15px;color:var(--body-text);}
+  .acc-body li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border:1.5px solid var(--gold);transform:rotate(45deg);}
+
+  /* ---------- CAPABILITIES FILTER ---------- */
+  .filter-row{display:flex;gap:10px;margin-bottom:36px;flex-wrap:wrap;}
+  .filter-btn{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;padding:9px 18px;border:1px solid var(--hairline);border-radius:100px;background:transparent;color:var(--muted);transition:all 0.25s ease;}
+  .filter-btn.active,.filter-btn:hover{border-color:var(--gold);color:var(--charcoal);background:rgba(173,138,85,0.08);}
+  .skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px 40px;}
+  @media(max-width:640px){.skill-grid{grid-template-columns:1fr;}}
+  .skill-item{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid rgba(226,220,204,0.6);font-size:14.5px;color:var(--body-text);transition:all 0.35s ease;}
+  .skill-item.hidden{opacity:0;height:0;padding:0;border:none;overflow:hidden;transform:translateX(-8px);}
+  .skill-item:hover{padding-left:8px;color:var(--charcoal);}
+  .skill-item .check{width:16px;height:16px;flex-shrink:0;border-radius:50%;border:1px solid var(--verified);display:flex;align-items:center;justify-content:center;}
+  .skill-item .check::after{content:"";width:5px;height:8px;border-right:1.5px solid var(--verified);border-bottom:1.5px solid var(--verified);transform:rotate(45deg) translate(-1px,-1px);}
+
+  /* ---------- LIVE DEMO ---------- */
+  .demo-box{border:1px solid var(--hairline);background:var(--paper-dim);padding:clamp(28px,4vw,48px);position:relative;}
+  .demo-caption{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);letter-spacing:0.04em;margin-bottom:28px;}
+  .demo-input-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+  .demo-input{flex:1;min-width:220px;padding:15px 18px;border:1px solid var(--hairline);background:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--charcoal);outline:none;transition:border-color 0.2s ease;}
+  .demo-input:focus{border-color:var(--gold);}
+  .demo-btn{padding:15px 26px;background:var(--ink);color:var(--paper);border:none;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;transition:background 0.25s ease;white-space:nowrap;}
+  .demo-btn:hover{background:var(--verified);}
+  .demo-btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .demo-steps{display:flex;flex-direction:column;gap:2px;min-height:20px;}
+  .demo-step{display:flex;align-items:center;gap:14px;padding:11px 0;opacity:0;transform:translateX(-10px);font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:var(--muted);border-bottom:1px solid rgba(226,220,204,0.5);}
+  .demo-step.show{animation:stepIn 0.4s ease forwards;}
+  @keyframes stepIn{to{opacity:1;transform:translateX(0);}}
+  .demo-step .spinner{width:14px;height:14px;border-radius:50%;border:2px solid var(--hairline);border-top-color:var(--gold);flex-shrink:0;animation:spin 0.7s linear infinite;}
+  .demo-step.done .spinner{display:none;}
+  .demo-step .tick{display:none;width:14px;height:14px;flex-shrink:0;border-radius:50%;border:1.5px solid var(--verified);align-items:center;justify-content:center;}
+  .demo-step.done .tick{display:flex;}
+  .demo-step.done .tick::after{content:"";width:4.5px;height:7px;border-right:1.5px solid var(--verified);border-bottom:1.5px solid var(--verified);transform:rotate(45deg) translate(-1px,-1px);}
+  .demo-step.done{color:var(--charcoal);}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .demo-result{margin-top:24px;padding:26px;border:1px dashed var(--verified);display:none;align-items:center;gap:20px;background:rgba(31,111,99,0.05);}
+  .demo-result.show{display:flex;animation:rise 0.5s ease forwards;}
+  .demo-result .badge{width:54px;height:54px;border-radius:50%;border:2px solid var(--verified);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--verified);font-size:22px;}
+  .demo-result .rtext b{font-family:'Fraunces',serif;font-size:19px;font-weight:500;color:var(--charcoal);display:block;}
+  .demo-result .rtext span{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);}
+
+  /* ---------- CREDENTIALS ---------- */
+  .edu-row{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:24px 0;border-bottom:1px solid var(--hairline);flex-wrap:wrap;}
+  .edu-row:first-child{padding-top:0;}
+  .edu-school{font-family:'Fraunces',serif;font-size:19px;font-weight:500;}
+  .edu-deg{font-size:14.5px;color:var(--verified);margin-top:4px;}
+  .edu-meta{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);text-align:right;line-height:1.7;}
+  .cred-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:44px 0 20px;padding-bottom:10px;border-bottom:1px solid var(--hairline);}
+  .cred-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--hairline);border:1px solid var(--hairline);}
+  @media(max-width:760px){.cred-grid{grid-template-columns:1fr;}}
+  .cred-card{background:var(--paper);padding:24px;transition:background 0.3s ease;}
+  .cred-card:hover{background:var(--paper-dim);}
+  .cred-card .org{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;}
+  .cred-card p{font-family:'Fraunces',serif;font-size:16.5px;font-weight:500;line-height:1.3;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:var(--paper);padding:92px 32px 40px;position:relative;overflow:hidden;}
+  footer::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 700px 400px at 15% 100%, rgba(173,138,85,0.12), transparent 60%);}
+  .signoff{max-width:1000px;margin:0 auto;position:relative;z-index:2;}
+  .signoff-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:18px;}
+  .signoff h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(30px,4.8vw,50px);max-width:17ch;line-height:1.12;margin-bottom:40px;}
+  .signoff h2 em{font-style:italic;color:var(--gold-bright);font-weight:300;}
+  .contact-row{display:flex;flex-wrap:wrap;gap:14px;}
+  .contact-btn{display:flex;align-items:center;gap:10px;padding:14px 20px;border:1px solid var(--hairline-dark);border-radius:2px;font-family:'IBM Plex Mono',monospace;font-size:13px;position:relative;transition:border-color 0.25s ease, background 0.25s ease;background:none;color:var(--paper);}
+  .contact-btn:hover{border-color:var(--gold-bright);background:rgba(199,163,105,0.06);}
+  .contact-btn .ico{width:14px;height:14px;flex-shrink:0;}
+  .contact-btn .ico path,.contact-btn .ico rect{stroke:var(--gold-bright);}
+  .copied-tip{position:absolute;top:-32px;left:50%;transform:translateX(-50%) translateY(4px);background:var(--verified);color:var(--paper);font-size:11px;padding:5px 10px;border-radius:3px;opacity:0;pointer-events:none;transition:all 0.25s ease;white-space:nowrap;}
+  .contact-btn.copied .copied-tip{opacity:1;transform:translateX(-50%) translateY(0);}
+  .foot-bottom{max-width:1000px;margin:76px auto 0;padding-top:22px;border-top:1px solid var(--hairline-dark);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted-dark);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;position:relative;z-index:2;}
+
+  @media(max-width:600px){
+    section.rec{padding:68px 22px;}
+    .acc-date{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow,h1.name,.role-line,.stat-row,.hero-meta,.seal-wrap,.reveal,.seal{animation:none !important;opacity:1 !important;transform:none !important;}
+    .ticker-track{animation:none;}
+    .reveal{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-mark"><span class="dot"></span>Digvijay Sharma</div>
+  <div class="nav-links">
+    <a href="#summary" data-nav>Profile</a>
+    <a href="#experience" data-nav>Footprint</a>
+    <a href="#skills" data-nav>Capabilities</a>
+    <a href="#demo" data-nav>Live Demo</a>
+    <a href="#credentials" data-nav>Credentials</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div id="spotlight"></div>
+  <div class="hero-top">
+    <span class="status-pill"><span class="pulse"></span>Available for opportunities</span>
+    <span>Jaunpur, Uttar Pradesh · EN / HI</span>
+  </div>
+
+  <div class="hero-main">
+    <div>
+      <div class="eyebrow">AML &amp; KYC Compliance Specialist</div>
+      <h1 class="name">Digvijay<br><em>Sharma</em></h1>
+      <p class="role-line">Heading operational units and engineering control methodologies across institutional onboarding, sanctions architecture, and financial crime frameworks.</p>
+      <div class="stat-row">
+        <div><span>Experience</span><b>3.10 yrs</b></div>
+        <div><span>Team Led</span><b>9–10 Analysts</b></div>
+        <div><span>Sector</span><b>Top-Tier Financial</b></div>
+      </div>
+      <div class="hero-meta">
+        <div><span>Email</span><a href="mailto:digvijaysharma115@gmail.com">digvijaysharma115@gmail.com</a></div>
+        <div><span>Phone</span><a href="tel:+917236945662">+91 72369 45662</a></div>
+        <div><span>LinkedIn</span><a href="https://www.linkedin.com/in/digvijay-sharma-4997691a4" target="_blank" rel="noopener">/digvijay-sharma</a></div>
+      </div>
+    </div>
+    <div class="seal-wrap">
+      <svg class="seal" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle class="ring-outer" cx="80" cy="80" r="70" stroke-width="1"/>
+        <circle class="ring-thin" cx="80" cy="80" r="62" stroke-width="1"/>
+        <circle class="ring-inner" cx="80" cy="80" r="54" stroke-width="1"/>
+        <path id="sealPath" d="M80,18 a62,62 0 1,1 -0.1,0" fill="none"/>
+        <text font-size="8.5" letter-spacing="3"><textPath href="#sealPath" startOffset="1%">AML · KYC · CDD · EDD · FLOD ·</textPath></text>
+        <text x="80" y="76" font-size="26" text-anchor="middle" class="center-text">DS</text>
+        <text x="80" y="96" font-size="8" text-anchor="middle" letter-spacing="1.5">EST. 2022</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+</div>
+
+<section class="rec" id="summary">
+  <div class="rec-head"><span class="rec-num">01</span><h2 class="rec-title">Professional Profile</h2><div class="rec-title-line"></div></div>
+  <div class="summary reveal">
+    <p>Accomplished AML &amp; KYC Compliance professional with <span class="accent2">3.10 years</span> of robust expertise in Financial Crime frameworks and operational team leadership. Demonstrated excellence in managing end-to-end institutional customer onboarding, CDD/EDD structures, and critical <span class="accent">global sanctions architecture</span> across top-tier financial sectors. Proven track record in heading operational units, managing team deliverables, isolating regulatory vulnerabilities, and engineering functional control methodologies.</p>
+  </div>
+</section>
+
+<section class="rec alt" id="experience">
+  <div class="inner">
+    <div class="rec-head"><span class="rec-num">02</span><h2 class="rec-title">Professional Footprint</h2><div class="rec-title-line"></div></div>
+    <div class="reveal">
+      <div class="acc-item open" data-acc>
+        <button class="acc-head">
+          <span class="acc-dot"></span>
+          <span class="acc-titles">
+            <span class="acc-role">Associate Process Manager<span class="active-badge">ACTIVE</span></span>
+            <span class="acc-org">eClerx Service Ltd · Pune, India</span>
+          </span>
+          <span class="acc-date">Sept 2025 — Present</span>
+          <span class="acc-chevron"></span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Provide direct operational leadership and strategic direction to a high-performing team of 9–10 compliance analysts, ensuring target SLA adherence and high-quality case delivery.</li>
+              <li>Orchestrate name screening operations against international sanctions, Politically Exposed Persons (PEP) matrices, and adverse global media profiles for institutional entities and core directorates.</li>
+              <li>Direct comprehensive Global KYC refresh and high-value corporate remediation campaigns, anchoring rigorous adherence to shifting global operational standard parameters.</li>
+              <li>Govern end-to-end full lifecycle Customer Due Diligence (CDD), Enhanced Due Diligence (EDD), and intricate cross-jurisdictional financial document validation tracks.</li>
+              <li>Evaluate baseline screening alerts via comparative cross-referencing metrics to eliminate false positives and isolate genuine matching threats, supervising the structural escalation process.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item" data-acc>
+        <button class="acc-head">
+          <span class="acc-dot"></span>
+          <span class="acc-titles">
+            <span class="acc-role">Senior Analyst — CDD, Financial Crime &amp; Control</span>
+            <span class="acc-org">NatWest Group · Gurugram, India</span>
+          </span>
+          <span class="acc-date">Sept 2022 — Aug 2025</span>
+          <span class="acc-chevron"></span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Acquired extensive experience analyzing complex financial transaction monitoring, assessing KYC checks of commercial and business banking customers, and identifying suspicious patterns through SARs and SAM.</li>
+              <li>Leveraged deep expertise in NatWest Group's Strategic In Life regulatory frameworks and industry best practices to contribute to the development of the First Line of Defence (FLOD).</li>
+              <li>Spearheaded the Strategic In Life Management (SILM) process to maintain ongoing compliance for existing bank entities.</li>
+              <li>Conducted thorough customer due diligence (CDD) to verify identity and assess potential risks associated with new and existing clients.</li>
+              <li>Reviewed and analyzed customer documentation, including identification documents and legal agreements, for regulatory and policy compliance.</li>
+              <li>Identified and escalated potential suspicious activities or fraudulent behavior by applying AML and counter-terrorism financing (CTF) guidelines.</li>
+              <li>Performed comprehensive screening using industry-standard tools including Moody's, ActOne, and World-Check infrastructure.</li>
+              <li>Utilized various tools and databases to perform background and adverse press checks, screening customers against sanctions lists, watchlists, and PEP databases.</li>
+              <li>Prepared detailed reports summarizing findings, documenting risk assessments, and recommending further action or enhanced due diligence.</li>
+              <li>Developed and delivered process training on SILM compliance, enhancing organization-wide compliance awareness and operational accuracy.</li>
+              <li>Stayed current with industry regulations, emerging trends, and best practices related to KYC and AML.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rec" id="skills">
+  <div class="rec-head"><span class="rec-num">03</span><h2 class="rec-title">Core Capabilities Matrix</h2><div class="rec-title-line"></div></div>
+  <div class="reveal">
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="reg">Compliance &amp; Leadership</button>
+      <button class="filter-btn" data-filter="screen">Screening &amp; Technical</button>
+      <button class="filter-btn" data-filter="analytic">Analytical</button>
+      <button class="filter-btn" data-filter="corp">Corporate Leadership</button>
+    </div>
+    <div class="skill-grid" id="skillGrid">
+      <div class="skill-item" data-cat="reg"><span class="check"></span>AML &amp; KYC Architecture</div>
+      <div class="skill-item" data-cat="screen"><span class="check"></span>PEP &amp; Sanctions Lists</div>
+      <div class="skill-item" data-cat="reg"><span class="check"></span>CDD/EDD Frameworks</div>
+      <div class="skill-item" data-cat="screen"><span class="check"></span>Adverse Media Inquiries</div>
+      <div class="skill-item" data-cat="reg"><span class="check"></span>Team Leadership (9–10 Members)</div>
+      <div class="skill-item" data-cat="screen"><span class="check"></span>World-Check</div>
+      <div class="skill-item" data-cat="reg"><span class="check"></span>Operational Performance Tracking</div>
+      <div class="skill-item" data-cat="screen"><span class="check"></span>Actimize</div>
+      <div class="skill-item" data-cat="analytic"><span class="check"></span>Transaction Flow Monitoring</div>
+      <div class="skill-item" data-cat="screen"><span class="check"></span>ActOne</div>
+      <div class="skill-item" data-cat="analytic"><span class="check"></span>False Positive Optimization</div>
+      <div class="skill-item" data-cat="screen"><span class="check"></span>OneKlick Suite</div>
+      <div class="skill-item" data-cat="analytic"><span class="check"></span>Critical Resolution Modeling</div>
+      <div class="skill-item" data-cat="corp"><span class="check"></span>First Line of Defence (FLOD)</div>
+      <div class="skill-item" data-cat="corp"><span class="check"></span>SAR &amp; SAM Oversight</div>
+      <div class="skill-item" data-cat="corp"><span class="check"></span>Team Development</div>
+      <div class="skill-item" data-cat="corp"><span class="check"></span>Stakeholder Relations</div>
+    </div>
+  </div>
+</section>
+
+<section class="rec alt" id="demo">
+  <div class="inner">
+    <div class="rec-head"><span class="rec-num">04</span><h2 class="rec-title">Screening in Action</h2><div class="rec-title-line"></div></div>
+    <div class="reveal">
+      <div class="demo-box">
+        <div class="demo-caption">Illustrative walkthrough of a standard CDD screening workflow — type any entity name to see the process run.</div>
+        <div class="demo-input-row">
+          <input type="text" class="demo-input" id="demoInput" placeholder="Enter an entity or individual name…" maxlength="40">
+          <button class="demo-btn" id="demoBtn">Run Screening</button>
+        </div>
+        <div class="demo-steps" id="demoSteps"></div>
+        <div class="demo-result" id="demoResult">
+          <div class="badge">✓</div>
+          <div class="rtext">
+            <b id="resultName">—</b>
+            <span id="resultMeta">No adverse findings · Cleared</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rec" id="credentials">
+  <div class="rec-head"><span class="rec-num">05</span><h2 class="rec-title">Academic Credentials &amp; Certifications</h2><div class="rec-title-line"></div></div>
+  <div class="reveal">
+    <div class="edu-row">
+      <div><div class="edu-school">University of Lucknow</div><div class="edu-deg">Bachelor of Commerce (Honours)</div></div>
+      <div class="edu-meta">Graduated<br>2022</div>
+    </div>
+    <div class="edu-row" style="border-bottom:none;">
+      <div><div class="edu-school">St. Patrick's Sr. Sec. School</div><div class="edu-deg">Intermediate &amp; High School</div></div>
+      <div class="edu-meta">Completed<br>2019</div>
+    </div>
+
+    <div class="cred-label">Professional Credentials</div>
+    <div class="cred-grid">
+      <div class="cred-card"><span class="org">Google</span><p>Fundamentals of Digital Marketing</p></div>
+      <div class="cred-card"><span class="org">Sheltown</span><p>Business Development Associate Track</p></div>
+      <div class="cred-card"><span class="org">Next Accountancy Services</span><p>Corporate Finance Internship</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="signoff">
+    <div class="signoff-eyebrow">Let's Connect</div>
+    <h2>Ready to lead your <em>next compliance mandate</em>.</h2>
+    <div class="contact-row">
+      <button class="contact-btn" data-copy="digvijaysharma115@gmail.com">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg>
+        digvijaysharma115@gmail.com
+        <span class="copied-tip">Copied!</span>
+      </button>
+      <button class="contact-btn" data-copy="+91 7236945662">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 005 5L14 13l5 2v4a2 2 0 01-2 2A16 16 0 014 6a2 2 0 012-2z"/></svg>
+        +91 72369 45662
+        <span class="copied-tip">Copied!</span>
+      </button>
+      <a class="contact-btn" href="https://www.linkedin.com/in/digvijay-sharma-4997691a4" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v6M8 8v0M12 17v-4a2 2 0 014 0v4M12 13v0"/></svg>
+        linkedin.com/in/digvijay-sharma
+      </a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>Digvijay Sharma — AML &amp; KYC Compliance Specialist</span>
+    <span>Case reviewed. No adverse findings.</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const nav = document.getElementById('nav');
+  const navLinks = document.querySelectorAll('[data-nav]');
+  const sections = ['summary','experience','skills','demo','credentials'].map(id=>document.getElementById(id));
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY > window.innerHeight * 0.55){ nav.classList.add('show'); } else { nav.classList.remove('show'); }
+    let current = sections[0].id;
+    for(const s of sections){ if(window.scrollY >= s.offsetTop - 140){ current = s.id; } }
+    navLinks.forEach(l=> l.classList.toggle('active', l.getAttribute('href') === '#'+current));
+  });
+
+  const hero = document.querySelector('.hero');
+  const spotlight = document.getElementById('spotlight');
+  hero.addEventListener('mousemove',(e)=>{
+    const r = hero.getBoundingClientRect();
+    const x = ((e.clientX - r.left)/r.width)*100;
+    const y = ((e.clientY - r.top)/r.height)*100;
+    spotlight.style.background = `radial-gradient(ellipse 700px 500px at ${x}% ${y}%, rgba(173,138,85,0.16), transparent 60%)`;
+  });
+
+  const tickerItems = [
+    ['World-Check','CLEAR'],['Actimize','VERIFIED'],['Sanctions Screen','CLEAR'],
+    ['PEP Matrix','NONE FOUND'],['Adverse Media','CLEAR'],['SAR / SAM','REVIEWED'],
+    ['CDD / EDD','COMPLETE'],['FLOD Check','READY'],['ActOne Case','CLOSED']
+  ];
+  const track = document.getElementById('tickerTrack');
+  const renderTicker = (arr)=> arr.map(([label,status])=>`<span class="ticker-item"><b>${label}</b><span class="up">▲ ${status}</span></span>`).join('');
+  track.innerHTML = renderTicker(tickerItems) + renderTicker(tickerItems);
+
+  document.querySelectorAll('[data-acc]').forEach(item=>{
+    const head = item.querySelector('.acc-head');
+    const body = item.querySelector('.acc-body');
+    const setHeight = ()=>{ body.style.maxHeight = item.classList.contains('open') ? body.scrollHeight+'px' : '0px'; };
+    setHeight();
+    head.addEventListener('click',()=>{ item.classList.toggle('open'); setHeight(); });
+    window.addEventListener('resize', setHeight);
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('#skillGrid .skill-item').forEach(item=>{
+        const show = f==='all' || item.dataset.cat===f;
+        item.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
+  const demoBtn = document.getElementById('demoBtn');
+  const demoInput = document.getElementById('demoInput');
+  const demoSteps = document.getElementById('demoSteps');
+  const demoResult = document.getElementById('demoResult');
+  const resultName = document.getElementById('resultName');
+  const steps = [
+    'Verifying identity documentation',
+    'Cross-referencing World-Check database',
+    'Screening for PEP exposure',
+    'Reviewing adverse media sources',
+    'Assessing sanctions &amp; FLOD alignment'
+  ];
+  demoBtn.addEventListener('click', ()=>{
+    const name = (demoInput.value || 'Unnamed Entity').trim().slice(0,40);
+    demoBtn.disabled = true;
+    demoSteps.innerHTML = '';
+    demoResult.classList.remove('show');
+    steps.forEach((label,i)=>{
+      const row = document.createElement('div');
+      row.className = 'demo-step';
+      row.innerHTML = `<span class="spinner"></span><span class="tick"></span><span>${label}…</span>`;
+      demoSteps.appendChild(row);
+      setTimeout(()=>{ row.classList.add('show'); }, i*550);
+      setTimeout(()=>{ row.classList.add('done'); }, i*550 + 420);
+    });
+    setTimeout(()=>{
+      resultName.textContent = name;
+      demoResult.classList.add('show');
+      demoBtn.disabled = false;
+    }, steps.length*550 + 300);
+  });
+  demoInput.addEventListener('keydown',(e)=>{ if(e.key==='Enter') demoBtn.click(); });
+
+  document.querySelectorAll('[data-copy]').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const val = btn.dataset.copy;
+      try{ await navigator.clipboard.writeText(val); }catch(e){}
+      btn.classList.add('copied');
+      setTimeout(()=>btn.classList.remove('copied'), 1400);
+    });
+  });
+</script>
+
+</body>
+</html>
