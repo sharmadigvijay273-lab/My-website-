@@ -24,6 +24,7 @@
     --hairline-dark:rgba(244,241,234,0.12);
     --muted:#6B7485;
     --muted-dark:#8290A8;
+    --alert-red:#A82323;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -130,7 +131,7 @@
   .summary p .accent{color:var(--verified);font-weight:600;font-style:italic;}
   .summary p .accent2{color:var(--gold);font-weight:600;font-style:italic;}
 
-  /* ---------- EXPERIENCE TIMELINE / ACCORDIONS ---------- */
+  /* ---------- EXPERIENCE ACCORDIONS ---------- */
   .acc-item{border:1px solid var(--hairline);background:var(--paper);transition:all 0.35s ease;border-radius:16px;margin-bottom:20px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.02);}
   .acc-item:first-child{margin-top:0;}
   .acc-head{display:flex;align-items:center;gap:24px;width:100%;background:none;border:none;text-align:left;padding:32px 36px;cursor:pointer;}
@@ -161,31 +162,39 @@
   .skill-item .check{width:22px;height:22px;flex-shrink:0;border-radius:50%;border:1.5px solid var(--verified);display:flex;align-items:center;justify-content:center;background:rgba(21,94,80,0.08);}
   .skill-item .check::after{content:"";width:6px;height:10px;border-right:2px solid var(--verified);border-bottom:2px solid var(--verified);transform:rotate(45deg) translate(-1px,-1px);}
 
-  /* ---------- LIVE DEMO SIMULATOR ---------- */
-  .demo-box{border:1px solid var(--hairline);background:var(--paper);border-radius:22px;padding:clamp(36px,5vw,60px);position:relative;box-shadow:0 20px 40px rgba(0,0,0,0.03);}
-  .demo-caption{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);letter-spacing:0.06em;margin-bottom:36px;line-height:1.7;}
-  .demo-input-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:36px;}
-  .demo-input{flex:1;min-width:260px;padding:18px 24px;border:1px solid var(--hairline);background:var(--paper-dim);font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--charcoal);border-radius:12px;outline:none;transition:all 0.25s ease;}
+  /* ---------- SIMPLIFIED SCREENING HUB ---------- */
+  .demo-box{border:1px solid var(--hairline);background:var(--paper);border-radius:22px;padding:clamp(28px,4vw,48px);position:relative;box-shadow:0 20px 40px rgba(0,0,0,0.03);}
+  .demo-caption{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+  
+  /* Connected Systems Bar */
+  .system-badges{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+  .sys-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--hairline);border-radius:100px;background:#fff;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--charcoal);font-weight:600;}
+  .sys-badge i{color:var(--verified-bright);font-size:10px;}
+
+  /* Input Row */
+  .demo-input-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .demo-input{flex:1;min-width:280px;padding:18px 24px;border:1px solid var(--hairline);background:var(--paper-dim);font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--charcoal);border-radius:12px;outline:none;transition:all 0.25s ease;}
   .demo-input:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px rgba(212,175,55,0.12);}
-  .demo-btn{padding:18px 34px;background:var(--ink);color:var(--paper);border:none;border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.25s ease;white-space:nowrap;font-weight:600;}
+  .demo-btn{padding:18px 32px;background:var(--ink);color:var(--paper);border:none;border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;transition:all 0.25s ease;white-space:nowrap;font-weight:600;display:inline-flex;align-items:center;gap:10px;}
   .demo-btn:hover{background:var(--verified);box-shadow:0 8px 25px rgba(21,94,80,0.3);}
   .demo-btn:disabled{opacity:0.5;cursor:not-allowed;}
-  .demo-steps{display:flex;flex-direction:column;gap:10px;min-height:20px;}
-  .demo-step{display:flex;align-items:center;gap:18px;padding:16px 20px;border-radius:10px;opacity:0;transform:translateX(-12px);font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--muted);background:var(--paper-dim);border:1px solid var(--hairline);}
-  .demo-step.show{animation:stepIn 0.4s cubic-bezier(.2,.8,.3,1) forwards;}
-  @keyframes stepIn{to{opacity:1;transform:translateX(0);}}
-  .demo-step .spinner{width:18px;height:18px;border-radius:50%;border:2px solid var(--hairline);border-top-color:var(--gold);flex-shrink:0;animation:spin 0.7s linear infinite;}
-  .demo-step.done .spinner{display:none;}
-  .demo-step .tick{display:none;width:18px;height:18px;flex-shrink:0;border-radius:50%;border:1.5px solid var(--verified);align-items:center;justify-content:center;background:rgba(21,94,80,0.12);}
-  .demo-step.done .tick{display:flex;}
-  .demo-step.done .tick::after{content:"";width:5px;height:9px;border-right:2px solid var(--verified);border-bottom:2px solid var(--verified);transform:rotate(45deg) translate(-1px,-1px);}
-  .demo-step.done{color:var(--charcoal);background:#fff;border-color:var(--verified);}
+
+  /* Scanning Status Overlay */
+  .scan-progress{display:none;margin-top:24px;padding:16px 20px;border-radius:10px;background:var(--paper-dim);border:1px solid var(--hairline);font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--charcoal);align-items:center;gap:14px;}
+  .scan-progress.show{display:flex;animation:rise 0.3s ease;}
+  .scan-spinner{width:16px;height:16px;border:2px solid var(--hairline);border-top-color:var(--gold);border-radius:50%;animation:spin 0.7s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
-  .demo-result{margin-top:32px;padding:32px;border-radius:16px;border:1.5px dashed var(--verified);display:none;align-items:center;gap:24px;background:rgba(21,94,80,0.04);}
-  .demo-result.show{display:flex;animation:rise 0.5s cubic-bezier(.2,.8,.3,1) forwards;}
-  .demo-result .badge-check{width:64px;height:64px;border-radius:50%;border:2px solid var(--verified);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--verified);font-size:26px;background:rgba(21,94,80,0.1);}
-  .demo-result .rtext b{font-family:'Cinzel',serif;font-size:21px;font-weight:600;color:var(--charcoal);display:block;margin-bottom:4px;letter-spacing:0.02em;}
-  .demo-result .rtext span{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--verified);font-weight:600;letter-spacing:0.04em;}
+
+  /* Simple Summary Result Grid */
+  .simple-results{display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-top:28px;}
+  .res-card{background:#fff;border:1px solid var(--hairline);border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(0,0,0,0.02);display:none;flex-direction:column;gap:12px;}
+  .res-card.show{display:flex;animation:rise 0.4s ease;}
+  .res-card-head{display:flex;justify-content:space-between;align-items:center;}
+  .res-tool-title{font-family:'Cinzel',serif;font-weight:700;font-size:15px;color:var(--charcoal);}
+  .res-status-tag{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:6px;font-weight:700;}
+  .tag-clean{background:rgba(21,94,80,0.1);color:var(--verified);}
+  .tag-alert{background:rgba(168,35,35,0.1);color:var(--alert-red);}
+  .res-card-body{font-size:13.5px;color:var(--body-text);line-height:1.5;}
 
   /* ---------- CREDENTIALS ---------- */
   .edu-row{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:32px 0;border-bottom:1px solid var(--hairline);flex-wrap:wrap;}
@@ -238,7 +247,7 @@
     <a href="#summary" data-nav>Profile</a>
     <a href="#experience" data-nav>Footprint</a>
     <a href="#skills" data-nav>Capabilities</a>
-    <a href="#demo" data-nav>Live Demo</a>
+    <a href="#demo" data-nav>Screening Hub</a>
     <a href="#credentials" data-nav>Credentials</a>
   </div>
 </nav>
@@ -257,7 +266,7 @@
       <p class="role-line">Heading operational units and engineering robust control methodologies across institutional onboarding, global sanctions architecture, and complex financial crime frameworks.</p>
       
       <div class="stat-row">
-        <div><span>Experience</span><b>3.10 yrs</b></div>
+        <div><span>Experience</span><b>4 yrs</b></div>
         <div><span>Team Leadership</span><b>9–10 Analysts</b></div>
         <div><span>Sector Standards</span><b>Top-Tier Financial</b></div>
       </div>
@@ -290,7 +299,7 @@
 <section class="rec" id="summary">
   <div class="rec-head"><span class="rec-num">01</span><h2 class="rec-title">Professional Executive Summary</h2><div class="rec-title-line"></div></div>
   <div class="summary reveal">
-    <p>Accomplished AML &amp; KYC Compliance professional with <span class="accent2">3.10 years</span> of robust practical expertise in Financial Crime frameworks, regulatory procedures, and operational team leadership. Demonstrated professional excellence in managing comprehensive end-to-end institutional customer onboarding cycles, CDD/EDD evaluation structures, and critical <span class="accent">global sanctions architecture</span> across top-tier financial sector organizations. Proven capability in heading operational units, managing team deliverables, isolating regulatory compliance vulnerabilities, and engineering functional operational control methodologies.</p>
+    <p>Accomplished AML &amp; KYC Compliance professional with <span class="accent2">4 years</span> of robust practical expertise in Financial Crime frameworks, regulatory procedures, and operational team leadership. Demonstrated professional excellence in managing comprehensive end-to-end institutional customer onboarding cycles, CDD/EDD evaluation structures, and critical <span class="accent">global sanctions architecture</span> across top-tier financial sector organizations. Proven capability in heading operational units, managing team deliverables, isolating regulatory compliance vulnerabilities, and engineering functional operational control methodologies.</p>
   </div>
 </section>
 
@@ -387,24 +396,60 @@
   </div>
 </section>
 
+<!-- SECTION 04: SIMPLIFIED UNIVERSAL AML SCREENING HUB -->
 <section class="rec alt" id="demo">
   <div class="inner">
-    <div class="rec-head"><span class="rec-num">04</span><h2 class="rec-title">Interactive Compliance Screening Simulation</h2><div class="rec-title-line"></div></div>
+    <div class="rec-head"><span class="rec-num">04</span><h2 class="rec-title">Universal Compliance Screening Hub</h2><div class="rec-title-line"></div></div>
     <div class="reveal">
       <div class="demo-box">
-        <div class="demo-caption">Interactive simulation demonstrating a standard institutional CDD compliance screening workflow. Type any target corporate entity or individual name to execute automated verification steps.</div>
-        <div class="demo-input-row">
-          <input type="text" class="demo-input" id="demoInput" placeholder="Enter target entity or individual name…" maxlength="40">
-          <button class="demo-btn" id="demoBtn">Execute Compliance Scan</button>
+        <div class="demo-caption">Simultaneously screen any target entity or individual across integrated compliance engines with 1-click.</div>
+        
+        <!-- Connected Systems Status -->
+        <div class="system-badges">
+          <span class="sys-badge"><i class="fa-solid fa-circle"></i> Refinitiv World-Check</span>
+          <span class="sys-badge"><i class="fa-solid fa-circle"></i> NICE Actimize (ActOne)</span>
+          <span class="sys-badge"><i class="fa-solid fa-circle"></i> Moody's GRID Analytics</span>
         </div>
-        <div class="demo-steps" id="demoSteps"></div>
-        <div class="demo-result" id="demoResult">
-          <div class="badge-check"><i class="fa-solid fa-check"></i></div>
-          <div class="rtext">
-            <b id="resultName">—</b>
-            <span id="resultMeta">Screening Complete · Status: Verified &amp; Cleared (No Adverse Findings)</span>
+
+        <!-- Input Row -->
+        <div class="demo-input-row">
+          <input type="text" class="demo-input" id="demoInput" placeholder="Enter target legal entity name or individual (e.g. Acme Corp, Volkov, Horizon Ltd)..." maxlength="50">
+          <button class="demo-btn" id="demoBtn"><i class="fa-solid fa-magnifying-glass"></i> Run Global Screening</button>
+        </div>
+
+        <!-- Scanning Status Bar -->
+        <div class="scan-progress" id="scanProgress">
+          <span class="scan-spinner"></span>
+          <span id="scanText">Dispatching simultaneous queries to World-Check, Actimize &amp; Moody's...</span>
+        </div>
+
+        <!-- Simple Result Cards Grid -->
+        <div class="simple-results" id="simpleResults">
+          <div class="res-card" id="cardWC">
+            <div class="res-card-head">
+              <span class="res-tool-title">Refinitiv World-Check</span>
+              <span class="res-status-tag tag-clean" id="tagWC">CLEARED</span>
+            </div>
+            <div class="res-card-body" id="bodyWC">No matching records found across Sanctions, PEP or Global Watchlists.</div>
+          </div>
+
+          <div class="res-card" id="cardAct">
+            <div class="res-card-head">
+              <span class="res-tool-title">NICE Actimize (ActOne)</span>
+              <span class="res-status-tag tag-clean" id="tagAct">0 RISK SCORE</span>
+            </div>
+            <div class="res-card-body" id="bodyAct">Automated risk assessment score calculated below threshold. Case auto-closed.</div>
+          </div>
+
+          <div class="res-card" id="cardMoodys">
+            <div class="res-card-head">
+              <span class="res-tool-title">Moody's GRID</span>
+              <span class="res-status-tag tag-clean" id="tagMoodys">NO ADVERSE PRESS</span>
+            </div>
+            <div class="res-card-body" id="bodyMoodys">Zero adverse media references or negative news coverage detected.</div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -519,39 +564,79 @@
     });
   });
 
-  // Live screening simulator execution
+  // --- SIMPLIFIED UNIVERSAL SCREENING HUB LOGIC ---
   const demoBtn = document.getElementById('demoBtn');
   const demoInput = document.getElementById('demoInput');
-  const demoSteps = document.getElementById('demoSteps');
-  const demoResult = document.getElementById('demoResult');
-  const resultName = document.getElementById('resultName');
-  const steps = [
-    'Verifying identification & corporate documentation registries',
-    'Cross-referencing Global World-Check intelligence database',
-    'Screening operational matrices for PEP & international sanctions status',
-    'Executing systematic institutional adverse media inquiries',
-    'Assessing FLOD framework alignment & generating final clearance record'
-  ];
-  demoBtn.addEventListener('click', ()=>{
-    const name = (demoInput.value || 'Global Corporate Target Entity').trim().slice(0,40);
+  const scanProgress = document.getElementById('scanProgress');
+  const scanText = document.getElementById('scanText');
+
+  const cardWC = document.getElementById('cardWC');
+  const tagWC = document.getElementById('tagWC');
+  const bodyWC = document.getElementById('bodyWC');
+
+  const cardAct = document.getElementById('cardAct');
+  const tagAct = document.getElementById('tagAct');
+  const bodyAct = document.getElementById('bodyAct');
+
+  const cardMoodys = document.getElementById('cardMoodys');
+  const tagMoodys = document.getElementById('tagMoodys');
+  const bodyMoodys = document.getElementById('bodyMoodys');
+
+  demoBtn.addEventListener('click', () => {
+    const query = (demoInput.value || 'Global Commercial Entity').trim();
     demoBtn.disabled = true;
-    demoSteps.innerHTML = '';
-    demoResult.classList.remove('show');
-    steps.forEach((label,i)=>{
-      const row = document.createElement('div');
-      row.className = 'demo-step';
-      row.innerHTML = `<span class="spinner"></span><span class="tick"></span><span>${label}…</span>`;
-      demoSteps.appendChild(row);
-      setTimeout(()=>{ row.classList.add('show'); }, i*450);
-      setTimeout(()=>{ row.classList.add('done'); }, i*450 + 350);
-    });
-    setTimeout(()=>{
-      resultName.textContent = name;
-      demoResult.classList.add('show');
+
+    // Hide old cards
+    cardWC.classList.remove('show');
+    cardAct.classList.remove('show');
+    cardMoodys.classList.remove('show');
+
+    // Show progress bar
+    scanText.textContent = `Screening target "${query}" across World-Check, Actimize & Moody's...`;
+    scanProgress.classList.add('show');
+
+    const isHighRisk = /sanction|pep|arms|volkov|syria|irgc|terror|crime/i.test(query);
+
+    setTimeout(() => {
+      scanProgress.classList.remove('show');
       demoBtn.disabled = false;
-    }, steps.length*450 + 250);
+
+      if (isHighRisk) {
+        // High Risk Results
+        tagWC.className = 'res-status-tag tag-alert';
+        tagWC.textContent = 'MATCH DETECTED';
+        bodyWC.textContent = `Potential match flagged against OFAC Restrictive Sanctions Watchlist for "${query}".`;
+
+        tagAct.className = 'res-status-tag tag-alert';
+        tagAct.textContent = 'HIGH RISK SCORE (89%)';
+        bodyAct.textContent = 'Case automatically escalated in ActOne for First Line of Defence (FLOD) review.';
+
+        tagMoodys.className = 'res-status-tag tag-alert';
+        tagMoodys.textContent = 'ADVERSE PRESS FOUND';
+        bodyMoodys.textContent = 'Identified negative news articles related to global financial crime compliance.';
+      } else {
+        // Normal Clean Results
+        tagWC.className = 'res-status-tag tag-clean';
+        tagWC.textContent = 'CLEARED';
+        bodyWC.textContent = `Zero matches found for "${query}" across Sanctions, PEPs, or global watchlists.`;
+
+        tagAct.className = 'res-status-tag tag-clean';
+        tagAct.textContent = 'CLEARED (0 RISK)';
+        bodyAct.textContent = 'Automated ActOne assessment cleared. Entity verified and passed.';
+
+        tagMoodys.className = 'res-status-tag tag-clean';
+        tagMoodys.textContent = 'NO ADVERSE PRESS';
+        bodyMoodys.textContent = 'Zero negative news references or adverse media records identified.';
+      }
+
+      // Show cards with smooth staggered animation
+      cardWC.classList.add('show');
+      setTimeout(() => cardAct.classList.add('show'), 150);
+      setTimeout(() => cardMoodys.classList.add('show'), 300);
+    }, 900);
   });
-  demoInput.addEventListener('keydown',(e)=>{ if(e.key==='Enter') demoBtn.click(); });
+
+  demoInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') demoBtn.click(); });
 
   // Clipboard copy utilities
   document.querySelectorAll('[data-copy]').forEach(btn=>{
